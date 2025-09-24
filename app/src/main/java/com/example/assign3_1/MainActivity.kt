@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -50,22 +51,21 @@ fun WeightModifiedRowScreen(modifier: Modifier = Modifier) {
     Row(modifier = modifier
         .fillMaxWidth()
     ) {
-        WeightModifiedColumn(
+        WeightModifiedBox(
             backgroundColor = Color.Red,
             textInput = "Red - 25%",
-            modifier = Modifier.weight(25f)
+            modifier = Modifier.weight(1f).fillMaxHeight()
         )
         WeightModifiedColumnWithChildren(
-            modifier = Modifier.weight(75f)
+            modifier = Modifier.weight(3f)
         )
     }
 }
 
-@Composable
-fun RowScope.WeightModifiedColumn(backgroundColor: Color, textInput: String, modifier: Modifier = Modifier) {
+@Composable // can be called from Row or Column
+fun WeightModifiedBox(backgroundColor: Color, textInput: String, modifier: Modifier = Modifier) {
     // modifier includes the weight
     Box(modifier = modifier
-        .fillMaxHeight()
         .background(backgroundColor),
         contentAlignment = Alignment.Center
     ) {
@@ -80,25 +80,25 @@ fun RowScope.WeightModifiedColumn(backgroundColor: Color, textInput: String, mod
 @Composable
 fun RowScope.WeightModifiedColumnWithChildren(modifier: Modifier = Modifier) {
     // modifier includes the weight
-    Row(modifier = modifier
+    Column(modifier = modifier
         .fillMaxHeight()
         .border(color = Color.Black, width = 2.dp),
     ) {
-        // 3 subchildren of the 75% box
-        WeightModifiedColumn(
+        // 3 subchildren of the 75% box in rows
+        WeightModifiedBox(
             backgroundColor = Color.LightGray,
             textInput = "2f",
-            modifier = Modifier.weight(2f)
+            modifier = Modifier.weight(2f).fillMaxWidth()
         )
-        WeightModifiedColumn(
+        WeightModifiedBox(
             backgroundColor = Color.DarkGray,
             textInput = "3f",
-            modifier = Modifier.weight(3f)
+            modifier = Modifier.weight(3f).fillMaxWidth()
         )
-        WeightModifiedColumn(
+        WeightModifiedBox(
             backgroundColor = Color.Blue,
             textInput = "5f",
-            modifier = Modifier.weight(5f)
+            modifier = Modifier.weight(5f).fillMaxWidth()
         )
     }
 }
