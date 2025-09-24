@@ -58,7 +58,6 @@ fun WeightModifiedRowScreen(modifier: Modifier = Modifier) {
         WeightModifiedColumnWithChildren(
             modifier = Modifier.weight(75f)
         )
-
     }
 }
 
@@ -85,6 +84,7 @@ fun RowScope.WeightModifiedColumnWithChildren(modifier: Modifier = Modifier) {
         .fillMaxHeight()
         .border(color = Color.Black, width = 2.dp),
     ) {
+        // 3 subchildren of the 75% box
         WeightModifiedColumn(
             backgroundColor = Color.LightGray,
             textInput = "2f",
